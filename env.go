@@ -23,6 +23,10 @@ func NewDefaultEnv() *Env {
 	return &Env{C.rocksdb_create_default_env()}
 }
 
+func (env *Env) SetBackgroundThreads(int n) {
+	C.rocksdb_env_set_high_priority_background_threads(env.Env, n)
+}
+
 // Close deallocates the Env, freeing the underlying struct.
 func (env *Env) Close() {
 	C.rocksdb_env_destroy(env.Env)
